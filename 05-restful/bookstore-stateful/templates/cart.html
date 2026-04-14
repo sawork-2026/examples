@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}购物车{% endblock %}
+{% block content %}
+<h1>购物车（服务端 Session）</h1>
+<p>Session ID：{{ session_id }}</p>
+{% if books %}
+<ul>
+  {% for book in books %}
+  <li>{{ book.title }} - ¥{{ book.price }}</li>
+  {% endfor %}
+</ul>
+<p>合计：¥{{ total }}</p>
+<form method="post" action="/checkout/start">
+  <button type="submit">开始结账</button>
+</form>
+{% else %}
+<p>购物车为空，请先从书籍列表加入几本书。</p>
+{% endif %}
+{% endblock %}

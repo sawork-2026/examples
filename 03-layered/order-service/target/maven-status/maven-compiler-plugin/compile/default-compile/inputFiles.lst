@@ -1,0 +1,6 @@
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/03-layered/order-service/src/main/java/sa/examples/order/model/Order.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/03-layered/order-service/src/main/java/sa/examples/order/controller/OrderController.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/03-layered/order-service/src/main/java/sa/examples/order/service/OrderService.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/03-layered/order-service/src/main/java/sa/examples/order/repository/OrderRepository.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/03-layered/order-service/src/main/java/sa/examples/order/OrderApplication.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/03-layered/order-service/src/main/java/sa/examples/order/aspect/LayerLoggingAspect.java

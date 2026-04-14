@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SPA Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>SPA 示例 - 用户信息</h1>
+        <input v-model="userId" type="number" placeholder="输入用户ID">
+        <button @click="loadUser">加载用户</button>
+
+        <div v-if="user">
+            <h2>{{ user.name }}</h2>
+            <p>Email: {{ user.email }}</p>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                userId: 1,
+                user: null
+            },
+            methods: {
+                loadUser() {
+                    fetch('/api/users/' + this.userId)
+                        .then(res => res.json())
+                        .then(data => {
+                            this.user = data;
+                        });
+                }
+            },
+            mounted() {
+                this.loadUser();
+            }
+        });
+    </script>
+</body>
+</html>

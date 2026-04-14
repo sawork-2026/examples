@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bookstore-restful SPA</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">bookstore-restful</p>
+      <h1>用一个 SPA 演示资源、状态与超媒体</h1>
+      <p class="lead">
+        前端页面不再依赖服务端模板流转，而是直接调用 REST API，
+        通过资源和链接完成交互。
+      </p>
+      <div class="hero-links">
+        <a href="/api">API Root</a>
+        <a href="/api/books">Books API</a>
+        <a href="/api/orders">Orders API</a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>书籍资源</h2>
+          <button id="refresh-books" type="button">刷新</button>
+        </div>
+        <p class="muted">点击“加入购物车”时，状态只保存在浏览器本地；此时服务端库存不会变化。</p>
+        <div id="books-list" class="stack"></div>
+        <pre id="books-response" class="response"></pre>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>客户端购物车</h2>
+          <button id="clear-cart" type="button">清空</button>
+        </div>
+        <p class="muted">这是 SPA 在客户端维护的应用状态。刷新页面后会从 <code>localStorage</code> 恢复。</p>
+        <div id="cart-list" class="stack"></div>
+        <button id="create-order" type="button">下单</button>
+        <pre id="cart-state" class="response"></pre>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>订单资源</h2>
+          <button id="refresh-orders" type="button">刷新</button>
+        </div>
+        <p class="muted">下单后，服务端会创建订单资源，并修改书籍库存这个资源状态。</p>
+        <div id="orders-list" class="stack"></div>
+        <pre id="orders-response" class="response"></pre>
+      </section>
+
+      <section class="panel panel-wide">
+        <div class="panel-head">
+          <h2>交互日志</h2>
+          <button id="clear-log" type="button">清空</button>
+        </div>
+        <pre id="request-log" class="response"></pre>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

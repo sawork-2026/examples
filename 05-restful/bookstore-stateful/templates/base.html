@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}在线书店{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/books">书籍列表</a> |
+    <a href="/cart">购物车/服务端状态</a> |
+    <a href="/checkout">结账流程</a> |
+    <a href="/api/books">API</a> |
+    <a href="/api/session">Session API</a>
+  </nav>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>

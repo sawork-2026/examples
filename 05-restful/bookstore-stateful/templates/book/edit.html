@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}编辑 {{ book.title }}{% endblock %}
+{% block content %}
+<h1>编辑书籍</h1>
+<form method="post" action="/books/{{ book.id }}">
+  <label>书名：<input type="text" name="title" value="{{ book.title }}" required></label><br>
+  <label>作者：<input type="text" name="author" value="{{ book.author }}" required></label><br>
+  <label>价格：<input type="number" name="price" step="0.01" value="{{ book.price }}" required></label><br>
+  <button type="submit">保存</button>
+  <a href="/books/{{ book.id }}">取消</a>
+</form>
+{% endblock %}

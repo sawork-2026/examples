@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}新增书籍{% endblock %}
+{% block content %}
+<h1>新增书籍</h1>
+<form method="post" action="/books">
+  <label>书名：<input type="text" name="title" required></label><br>
+  <label>作者：<input type="text" name="author" required></label><br>
+  <label>价格：<input type="number" name="price" step="0.01" required></label><br>
+  <button type="submit">提交</button>
+  <a href="/books">取消</a>
+</form>
+{% endblock %}

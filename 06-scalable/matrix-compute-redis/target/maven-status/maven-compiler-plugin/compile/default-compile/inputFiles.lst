@@ -1,0 +1,4 @@
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/06-scalable/matrix-compute-redis/src/main/java/sa/examples/matrix/service/MatrixService.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/06-scalable/matrix-compute-redis/src/main/java/sa/examples/matrix/MatrixApplication.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/06-scalable/matrix-compute-redis/src/main/java/sa/examples/matrix/model/MatrixResult.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/06-scalable/matrix-compute-redis/src/main/java/sa/examples/matrix/controller/MatrixController.java

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p>作者：{{ book.author }}</p>
+<p>价格：¥{{ book.price }}</p>
+<p>当前购物车：{{ cart_size }} 本书</p>
+<form method="post" action="/cart/items">
+  <input type="hidden" name="book_id" value="{{ book.id }}">
+  <button type="submit">加入购物车</button>
+</form>
+<a href="/books/{{ book.id }}/edit">编辑</a> |
+<a href="/books">返回列表</a>
+{% endblock %}

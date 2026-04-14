@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}书籍列表{% endblock %}
+{% block content %}
+<h1>书籍列表</h1>
+<p>当前购物车：{{ cart_size }} 本书</p>
+<table>
+  <tr><th>ID</th><th>书名</th><th>作者</th><th>价格</th><th>操作</th></tr>
+  {% for book in books %}
+  <tr>
+    <td>{{ book.id }}</td>
+    <td><a href="/books/{{ book.id }}">{{ book.title }}</a></td>
+    <td>{{ book.author }}</td>
+    <td>¥{{ book.price }}</td>
+    <td>
+      <a href="/books/{{ book.id }}/edit">编辑</a>
+      <form method="post" action="/books/{{ book.id }}" style="display:inline">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">删除</button>
+      </form>
+      <form method="post" action="/cart/items" style="display:inline">
+        <input type="hidden" name="book_id" value="{{ book.id }}">
+        <button type="submit">加入购物车</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<a href="/books/new">新增书籍</a>
+{% endblock %}

@@ -1,0 +1,6 @@
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/02-components/movie-finder/src/main/java/moviefinder/ColonMovieFinder.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/02-components/movie-finder/src/main/java/moviefinder/InMemoryMovieFinder.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/02-components/movie-finder/src/main/java/moviefinder/Movie.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/02-components/movie-finder/src/main/java/moviefinder/MovieFinder.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/02-components/movie-finder/src/main/java/moviefinder/MovieLister.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/02-components/movie-finder/src/main/java/moviefinder/MovieListerSetter.java

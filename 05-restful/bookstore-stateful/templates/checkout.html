@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}结账流程{% endblock %}
+{% block content %}
+<h1>结账流程（服务端保存流程状态）</h1>
+<p>Session ID：{{ session_id }}</p>
+<p>当前步骤：{{ step }}</p>
+{% if books %}
+<ul>
+  {% for book in books %}
+  <li>{{ book.title }} - ¥{{ book.price }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% if step != "done" %}
+<form method="post" action="/checkout/next">
+  <button type="submit">进入下一步</button>
+</form>
+{% else %}
+<p>结账流程已经完成。</p>
+{% endif %}
+{% endblock %}
