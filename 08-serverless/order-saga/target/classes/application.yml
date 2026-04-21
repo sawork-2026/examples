@@ -1,6 +1,0 @@
-spring:
-  cloud:
-    function:
-      definition: deductInventory;chargePayment;sendNotification;rollbackInventory
-  main:
-    web-application-type: none   # saga runs headless; orchestrator is called directly

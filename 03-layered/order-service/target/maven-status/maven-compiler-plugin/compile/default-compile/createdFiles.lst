@@ -1,6 +1,0 @@
-sa/examples/order/model/Order.class
-sa/examples/order/aspect/LayerLoggingAspect.class
-sa/examples/order/service/OrderService.class
-sa/examples/order/OrderApplication.class
-sa/examples/order/controller/OrderController.class
-sa/examples/order/repository/OrderRepository.class

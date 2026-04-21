@@ -1,0 +1,30 @@
+# Build outputs
+target/
+build/
+out/
+dist/
+*.class
+*.jar
+*.war
+
+# Maven / Gradle
+.mvn/
+.gradle/
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

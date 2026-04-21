@@ -1,8 +1,0 @@
-com/example/serverless/model/SearchRequest.class
-com/example/serverless/JpetstoreServerlessApplication.class
-com/example/serverless/model/OrderResult.class
-com/example/serverless/model/PurchaseRequest.class
-com/example/serverless/service/OrderService.class
-com/example/serverless/service/ProductRepository.class
-com/example/serverless/FunctionConfig.class
-com/example/serverless/model/Product.class
