@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-boot
+  labels:
+    app: echo-boot
+spec:
+  replicas: 1                   # start with 1; scale with: kubectl scale deployment echo-boot --replicas=2
+  selector:
+    matchLabels:
+      app: echo-boot
+  strategy:
+    type: RollingUpdate         # zero-downtime update: replace pods one at a time
+    rollingUpdate:
+      maxUnavailable: 0         # never reduce below desired count during update
+      maxSurge: 1               # allow one extra pod during rollout
+  template:
+    metadata:
+      labels:
+        app: echo-boot
+    spec:
+      containers:
+        - name: echo-boot
+          image: echo-boot:latest
+          imagePullPolicy: Never  # image lives inside minikube, no registry pull needed
+          ports:
+            - containerPort: 8080
+
+          # Resource limits: K8s uses these for scheduling decisions
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          # Liveness probe: if this fails, K8s restarts the container
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          # Readiness probe: if this fails, K8s removes the pod from the Service endpoints
+          # (stops sending traffic) without restarting it
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5

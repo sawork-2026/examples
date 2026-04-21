@@ -1,0 +1,5 @@
+com/example/batch/BatchEtlApplication.class
+com/example/batch/model/Person.class
+com/example/batch/PersonItemProcessor.class
+com/example/batch/BatchConfig.class
+com/example/batch/model/PersonReport.class

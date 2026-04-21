@@ -1,0 +1,64 @@
+{
+  "Comment": "JPetStore order saga: deductInventory → chargePayment → sendNotification. Compensation via rollbackInventory on payment failure.",
+  "StartAt": "DeductInventory",
+  "States": {
+    "DeductInventory": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT:function:deductInventory",
+      "ResultPath": "$",
+      "Next": "ChargePayment",
+      "Retry": [{
+        "ErrorEquals": ["States.TaskFailed"],
+        "MaxAttempts": 2,
+        "IntervalSeconds": 1,
+        "BackoffRate": 2.0
+      }],
+      "Catch": [{
+        "ErrorEquals": ["States.ALL"],
+        "ResultPath": "$.error",
+        "Next": "OrderFailed"
+      }]
+    },
+
+    "ChargePayment": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT:function:chargePayment",
+      "ResultPath": "$",
+      "Next": "SendNotification",
+      "Catch": [{
+        "ErrorEquals": ["States.ALL"],
+        "ResultPath": "$.error",
+        "Next": "RollbackInventory"
+      }]
+    },
+
+    "SendNotification": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT:function:sendNotification",
+      "ResultPath": "$",
+      "Next": "OrderSucceeded",
+      "Catch": [{
+        "ErrorEquals": ["States.ALL"],
+        "ResultPath": "$.notificationError",
+        "Next": "OrderSucceeded"
+      }]
+    },
+
+    "RollbackInventory": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT:function:rollbackInventory",
+      "ResultPath": "$.rollback",
+      "Next": "OrderFailed"
+    },
+
+    "OrderSucceeded": {
+      "Type": "Succeed"
+    },
+
+    "OrderFailed": {
+      "Type": "Fail",
+      "Error": "OrderFailed",
+      "Cause": "See $.error for failure details"
+    }
+  }
+}

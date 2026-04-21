@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    function:
+      # YAML composition: Spring Cloud Function stitches these four beans together
+      # and exposes them as a single endpoint: POST /orderPipeline
+      # Changing the pipeline order or adding a stage requires no Java code change.
+      definition: validateOrder|enrichWithProduct|calculateTotal|applyDiscount
+
+server:
+  port: 8080
+
+# -----------------------------------------------------------------
+# Local dev:  mvn spring-boot:run
+#   POST http://localhost:8080/orderPipeline
+#   Body: {"productId":"DOG-001","qty":5,"userId":"user-1","couponCode":"SAVE10"}
+#
+# Each stage can also be called independently:
+#   POST /validateOrder     — stage 1 only
+#   POST /enrichWithProduct — stage 2 only (useful for testing)
+# -----------------------------------------------------------------

@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    function:
+      # Expose both functions via HTTP (local dev) and Lambda (cloud)
+      definition: searchProducts;purchase
+
+server:
+  port: 8080
+
+# -----------------------------------------------------------------
+# Local dev:  mvn spring-boot:run
+#   POST http://localhost:8080/searchProducts
+#   POST http://localhost:8080/purchase
+#
+# Lambda deploy:
+#   1. mvn package  (spring-cloud-function-adapter-aws bundles the adapter)
+#   2. Set Handler = org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
+#   3. Set env var SPRING_CLOUD_FUNCTION_DEFINITION=searchProducts  (one function per Lambda)
+#
+# Native Image (eliminates JVM cold start ~3s → ~100ms):
+#   mvn -Pnative package
+#   Deploy as custom runtime (provided.al2)
+# -----------------------------------------------------------------

@@ -1,0 +1,5 @@
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/10-pipefilter/batch-etl/src/main/java/com/example/batch/PersonItemProcessor.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/10-pipefilter/batch-etl/src/main/java/com/example/batch/BatchConfig.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/10-pipefilter/batch-etl/src/main/java/com/example/batch/model/PersonReport.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/10-pipefilter/batch-etl/src/main/java/com/example/batch/model/Person.java
+/Users/chun/Develop/software-architecture-explained-with-spring/examples/10-pipefilter/batch-etl/src/main/java/com/example/batch/BatchEtlApplication.java

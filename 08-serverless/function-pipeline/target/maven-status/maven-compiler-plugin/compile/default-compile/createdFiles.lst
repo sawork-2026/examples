@@ -1,0 +1,7 @@
+com/example/pipeline/model/EnrichedOrder.class
+com/example/pipeline/FunctionPipelineApplication.class
+com/example/pipeline/service/ProductCatalog.class
+com/example/pipeline/service/ProductCatalog$ProductInfo.class
+com/example/pipeline/model/OrderRequest.class
+com/example/pipeline/FunctionConfig.class
+com/example/pipeline/model/PricedOrder.class

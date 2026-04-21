@@ -1,0 +1,18 @@
+app:
+  version: 1.0.0
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      # Expose liveness and readiness as separate endpoints
+      # K8s probes: /actuator/health/liveness  /actuator/health/readiness
+      probes:
+        enabled: true
+      show-details: always
