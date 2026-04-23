@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-cloud-function-intro
+  main:
+    banner-mode: off
+
+# When running as a web app, all Function/Consumer/Supplier beans are automatically
+# exposed at POST /<beanName> (GET for Suppliers). No explicit definition needed.
+#
+# To try composition over HTTP, curl the pipe syntax directly:
+#   curl -d hello http://localhost:8080/uppercase,reverseString
+# (Spring Cloud Function URL-decodes the "|" as "," to avoid shell escaping.)
