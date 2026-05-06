@@ -1,0 +1,28 @@
+server:
+  port: 0
+
+spring:
+  cloud:
+    function:
+      definition: supplyLoan;checkLoan;logLoan
+    stream:
+      bindings:
+        supplyLoan-out-0:
+          destination: loan-applications
+        checkLoan-in-0:
+          destination: loan-applications
+          group: loan-checker
+        checkLoan-out-0:
+          destination: loan-results
+        logLoan-in-0:
+          destination: loan-results
+          group: loan-logger
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  integration:
+    poller:
+      fixed-delay: 3000
