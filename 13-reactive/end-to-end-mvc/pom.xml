@@ -11,12 +11,11 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>end-to-end-reactive</artifactId>
+    <artifactId>end-to-end-mvc</artifactId>
     <version>1.0.0</version>
     <description>
-        End-to-end reactive: WebFlux (HTTP) -> R2DBC (DB) on H2.
-        Same dataset served as Flux of NDJSON; logs show the signal chain
-        all the way from DB to HTTP response.
+        Blocking Employee service: Spring MVC + JPA + H2.
+        Counterpart of end-to-end (WebFlux + R2DBC) for performance comparison.
     </description>
 
     <properties>
@@ -26,15 +25,15 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.r2dbc</groupId>
-            <artifactId>r2dbc-h2</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
