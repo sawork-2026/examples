@@ -1,0 +1,6 @@
+export JAVA_HOME=__JAVA_HOME__
+export HADOOP_HOME=__HADOOP_HOME__
+export HADOOP_LOG_DIR=__RUN_DIR__/logs
+export HADOOP_PID_DIR=__RUN_DIR__/pids
+export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true"
+

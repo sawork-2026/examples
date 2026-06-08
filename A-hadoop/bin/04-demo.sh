@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
+
+require_java
+require_hadoop_home
+require_rendered_conf
+ensure_dirs
+
+HDFS_USER="${HDFS_USER:-$(whoami)}"
+LOCAL_DEMO_DIR="${RUN_DIR}/demo"
+LOCAL_FILE="${LOCAL_DEMO_DIR}/orders.csv"
+HDFS_DIR="/user/${HDFS_USER}/input"
+HDFS_FILE="${HDFS_DIR}/orders.csv"
+
+mkdir -p "${LOCAL_DEMO_DIR}"
+cat > "${LOCAL_FILE}" <<'EOF'
+order_id,user_id,total
+1001,u-001,42.50
+1002,u-002,18.00
+1003,u-001,128.90
+EOF
+
+info "Create HDFS directory"
+hdfs_cmd dfs -mkdir -p "${HDFS_DIR}"
+
+info "Upload local file to HDFS"
+hdfs_cmd dfs -put -f "${LOCAL_FILE}" "${HDFS_FILE}"
+
+info "List HDFS directory"
+hdfs_cmd dfs -ls "${HDFS_DIR}"
+
+info "Read HDFS file"
+hdfs_cmd dfs -cat "${HDFS_FILE}"
+
+info "Show blocks and locations"
+hdfs_cmd fsck "${HDFS_FILE}" -files -blocks -locations
+
