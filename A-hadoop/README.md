@@ -40,6 +40,12 @@ bash bin/06-wordcount.sh
 - `06-wordcount.sh`: 运行 Hadoop 自带 WordCount 示例。
 - `05-stop.sh`: 停止本例启动的 HDFS 进程。
 
+WordCount 示例源码已经放在本目录，便于课堂上直接打开阅读：
+
+```text
+src/main/java/org/apache/hadoop/examples/WordCount.java
+```
+
 打开 NameNode UI：
 
 ```text
