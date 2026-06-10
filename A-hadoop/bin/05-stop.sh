@@ -1,33 +1,35 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
+set -euo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
-if [[ ! -x "${HADOOP_HOME}/bin/hdfs" ]]; then
-  warn "Hadoop not found at ${HADOOP_HOME}; nothing to stop"
+stop_one() {
+  local service="$1"
+  local pid_file="${HADOOP_PID_DIR}/${service}.pid"
+
+  if [[ ! -f "${pid_file}" ]]; then
+    return
+  fi
+
+  local pid
+  pid="$(cat "${pid_file}")"
+
+  if kill -0 "${pid}" >/dev/null 2>&1; then
+    info "Stopping ${service}, pid ${pid}"
+    kill "${pid}" >/dev/null 2>&1 || true
+  fi
+
+  rm -f "${pid_file}"
+}
+
+if [[ ! -d "${HADOOP_PID_DIR}" ]]; then
+  info "No HDFS pid directory found; nothing to stop"
   exit 0
 fi
 
-if [[ -f "$(service_pid_file secondarynamenode)" || -f "$(service_pid_file datanode)" || -f "$(service_pid_file namenode)" ]]; then
-  info "Stopping HDFS daemons"
-  stop_hdfs_service secondarynamenode
-  stop_hdfs_service datanode
-  stop_hdfs_service namenode
-elif [[ -f "${RENDERED_CONF_DIR}/core-site.xml" ]]; then
-  warn "No local pid files found; trying Hadoop daemon stop"
-  hdfs_cmd --daemon stop secondarynamenode || true
-  hdfs_cmd --daemon stop datanode || true
-  hdfs_cmd --daemon stop namenode || true
-else
-  warn "Rendered config not found; trying default Hadoop stop"
-  "${HADOOP_HOME}/bin/hdfs" --daemon stop secondarynamenode || true
-  "${HADOOP_HOME}/bin/hdfs" --daemon stop datanode || true
-  "${HADOOP_HOME}/bin/hdfs" --daemon stop namenode || true
-fi
+stop_one secondarynamenode
+stop_one datanode
+stop_one namenode
 
-info "Remaining Java processes"
-jps || true
+info "Stop command finished"

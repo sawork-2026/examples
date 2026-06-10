@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
+set -euo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
@@ -12,7 +9,7 @@ if [[ -x "${HADOOP_HOME}/bin/hdfs" ]]; then
 fi
 
 info "Removing runtime data and rendered config"
-rm -rf "${RUN_DIR}" "${RENDERED_CONF_DIR}"
+rm -rf "${RUN_DIR}" "${CONF_DIR}"
 
 if [[ "${CLEAN_DOWNLOAD:-0}" == "1" ]]; then
   info "Removing downloaded Hadoop and cache"
@@ -20,4 +17,3 @@ if [[ "${CLEAN_DOWNLOAD:-0}" == "1" ]]; then
 fi
 
 info "Clean complete"
-

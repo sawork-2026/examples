@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
+set -euo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
 require_cmd curl
 require_cmd tar
-require_java
+setup_java
 ensure_dirs
 
 if [[ -x "${HADOOP_HOME}/bin/hdfs" ]]; then
@@ -18,10 +15,15 @@ if [[ -x "${HADOOP_HOME}/bin/hdfs" ]]; then
   exit 0
 fi
 
-tarball="$(hadoop_tarball_name)"
+case "$(uname -m)" in
+  arm64|aarch64) default_tarball="hadoop-${HADOOP_VERSION}-aarch64.tar.gz" ;;
+  *) default_tarball="hadoop-${HADOOP_VERSION}.tar.gz" ;;
+esac
+
+tarball="${HADOOP_TARBALL:-${default_tarball}}"
 tarball_path="${CACHE_DIR}/${tarball}"
-primary_url="${APACHE_DOWNLOAD_BASE}/hadoop-${HADOOP_VERSION}/${tarball}"
-archive_url="${APACHE_ARCHIVE_BASE}/hadoop-${HADOOP_VERSION}/${tarball}"
+primary_url="https://dlcdn.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/${tarball}"
+archive_url="https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/${tarball}"
 
 if [[ ! -f "${tarball_path}" ]]; then
   info "Downloading ${primary_url}"

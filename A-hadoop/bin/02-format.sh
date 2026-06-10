@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
+set -euo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
-require_java
-require_hadoop_home
-require_rendered_conf
+setup_java
+require_hadoop
+require_conf
 ensure_dirs
 
 name_current="${RUN_DIR}/hdfs/name/current"
@@ -25,5 +22,4 @@ if [[ "${FORMAT_FORCE:-0}" == "1" ]]; then
 fi
 
 info "Formatting NameNode"
-hdfs_cmd namenode -format -nonInteractive
-
+hdfs namenode -format -nonInteractive
